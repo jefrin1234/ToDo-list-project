@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <section id="section">  
+  
+  <div id="main">
+  <p>Todo list</p>
+
+  <div class="todo-input-grid">
+
+      <input type="text" placeholder="Todo name" class="js-name-input name-input">
+      <input type="date" class="js-due-date-input due-date-input ">
+      <button class="add-todo-button" onclick="addTodo()">Add</button> <br>
+
+ </div>
+
+  <div class="js-todo-list todo-grid" ></div>
+</div>
+</section>
+
+ 
+    
+  <script>
+    
+    const todoList = [];
+
+    renderTodoList();
+
+   function renderTodoList(){
+
+            let todoListHTML=''; 
+
+            for(let i = 0; i < todoList.length; i++){
+              const todoObject = todoList[i];
+
+              const name = todoObject.name;
+              const dueDate = todoObject.dueDate;
+
+              const html = 
+              `<div>${name}</div>
+               <div> ${dueDate}</div>
+               <button class="delete-todo-button" onclick="
+                  todoList.splice(${i},1);
+                  renderTodoList();
+                  ">
+                  Delete</button>
+              
+               `;
+
+              todoListHTML += html;  
+              
+            }
+           
+            document.querySelector('.js-todo-list').innerHTML = todoListHTML;
+          }
+           
+
+          function addTodo() {
+              const inputElement = document.querySelector('.js-name-input');
+            
+              const name = inputElement.value;
+              const dateInputElement = document.querySelector('.js-due-date-input');
+
+              const dueDate = dateInputElement.value;
+
+              todoList.push({
+                name:name,
+                dueDate:dueDate});
+              inputElement.value = '';
+          
+              renderTodoList();
+            
+
+
+      }
+  </script>
+
+
+</body>
+</html
+
+
+
